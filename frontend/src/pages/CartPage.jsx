@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react'
 import {useAppContext} from '../context/AppContext';
 import { assets, dummyAddress } from '../assets/assets';
 import toast from 'react-hot-toast';
-import { data } from 'react-router-dom';
+
 
 
 const CartPage = () => {
-    const {navigate,products,currency, updateCartItem,removeFromCart, cartItems,getCartCount, getCartAmount, axios, user, setCartItems} = useAppContext()
+    const {navigate,products,currency, updateCartItem,removeFromCart, cartItems,getCartCount, getCartAmount, axios,user} = useAppContext()
  
   const [cartArray, setCartArray] = useState([])
-  const [addresses, setAddresses] = useState([])
+  const [addresses, setAddresses] = useState(dummyAddress)
   const [showAddress, setShowAddress] = useState(false)
   const [selectedAddress, setSelectedAddress] = useState(null)  
   const [paymentOption, setPaymentOption] = useState("COD")
@@ -68,13 +68,7 @@ const CartPage = () => {
      
   }
   
-  useEffect(()=>{
-    if(products.length >0 && cartItems){
-        getCart()
-    }
-    
-  },[products, cartItems])
-    
+  
     
  useEffect(()=>{
     if(user){
@@ -119,7 +113,7 @@ const CartPage = () => {
                             </div>
                         </div>
                         <p className="text-center">{currency}{product.offerPrice * product.quantity}</p>
-                        <button onClick={()=>removeFromCart(product._id)} className="cursor-pointer mx-auto">
+                        <button onClick={()=>removeFromCart()} className="cursor-pointer mx-auto">
                             <img src={assets.cross} alt='remove' className='inline-block w-6 h-6'/>
                         </button>
                     </div>)
@@ -140,12 +134,13 @@ const CartPage = () => {
                     <p className="text-sm font-medium uppercase">পণ্য ডেলিভারীর ঠিকানা</p>
                     <div className="relative flex justify-between items-start mt-2">
                         <p className="text-gray-500">{selectedAddress ? `${selectedAddress.street}, ${selectedAddress.city}, ${selectedAddress.state}, ${selectedAddress.country}` :"ঠিকানা পাওয়া যায়নি"}</p>
+                       
                         <button onClick={() => setShowAddress(!showAddress)} className="text-primary hover:underline cursor-pointer">
                             <span className="text-green-800">ঠিকানা পরিবর্তন করুন</span>
                         </button>
                         {showAddress && (
                             <div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full">
-                                {addresses.map((address, index)=>(<p onClick={() => setShowAddress(address)} className="text-gray-500 p-2 hover:bg-gray-100">
+                                {addresses.map((address, index)=>(<p onClick={() =>{setSelectedAddress(address); setShowAddress(false)}} className="text-gray-500 p-2 hover:bg-gray-100">
                                     {address.street}, {address.city}, {address.state}, {address.country}
                                 </p>))}
                                 <p onClick={() => navigate('/add-address')} className="text-primary text-center cursor-pointer p-2 hover:bg-primary/10">
