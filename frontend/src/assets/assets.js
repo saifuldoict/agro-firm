@@ -89,6 +89,8 @@ import katimon_1 from './katimon_1.jpg'
 import seed_Less_1 from './seed_Less_1.jpg'
 import malta_1 from './malta_1.jpg'
 import malta_2 from './malta_2.jpg'
+import cow_1 from './cow_1.jpg'
+import cow_2 from './cow_2.jpg'
 
 
 
@@ -183,7 +185,9 @@ export const assets ={
     katimon_1,
     seed_Less_1,
     malta_1,
-    malta_2
+    malta_2,
+    cow_1,
+    cow_2
     
 
 
@@ -220,6 +224,12 @@ export const categories = [
         path:"লেবু",
         image:product_5,
         bgColor: "#E0F6FF"
+    },
+    {
+        text:"গরু",
+        path:"গরু",
+        image:cow_1,
+        bgColor: "#F0F5DE"
     }
     
 ]

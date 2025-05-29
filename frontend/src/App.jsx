@@ -44,6 +44,7 @@ const isSellerPath = useLocation().pathname.includes("seller")
           <Route path='/products/:category' element={<ProductCategroy/>}/>
           <Route path='/products/:category/:id' element={<ProductDetails/>}/>
           <Route path='/cart' element={<CartPage/>}/>
+
           <Route path='/add-address' element={<AddAddress/>}/>
           <Route path='/my-orders' element={<MyOrder/>}/>
           <Route path='/loader' element={<Loading/>}/>

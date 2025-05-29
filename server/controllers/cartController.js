@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from "../models/UserModel.js";
 // Update User CartDate : /api/cart/update
 
 

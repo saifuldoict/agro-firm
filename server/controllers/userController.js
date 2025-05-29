@@ -1,8 +1,8 @@
-import User from '../models/User.js'
+import UserModel from '../models/UserModel.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-//Register User
+//Register User : /api/user/register
 export const register = async (req, res) =>{
     try {
         const { name, email, password } = req.body;
@@ -10,12 +10,13 @@ export const register = async (req, res) =>{
         if (!name || !email || !password) {
             return res.json({success: false, message: "Please fill in all fields" });
         }
-        const existingUser = await User.findOne({ email });
+        const existingUser = await UserModel.findOne({ email });
         if (existingUser) {
             return res.json({success: false, message: "Email already in use" });
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-         const user = await User({name, email, password: hashedPassword });
+         const user = await UserModel.create({name, email, password: hashedPassword });
+         
         const token = jwt.sign({id:user._id}, process.env.JWT_SECRET, { expiresIn: '7d' });
         res.cookie('token', token,{
             httpOnly: true,

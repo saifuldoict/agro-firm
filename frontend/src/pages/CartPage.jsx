@@ -6,13 +6,12 @@ import { data } from 'react-router-dom';
 
 
 const CartPage = () => {
-    const {navigate,products,currency, addToCart, updateCartItem,removeFromCart, cartItems,getCartCount, getCartAmount, axios, user, setCartItems} = useAppContext()
+    const {navigate,products,currency, updateCartItem,removeFromCart, cartItems,getCartCount, getCartAmount, axios, user, setCartItems} = useAppContext()
  
   const [cartArray, setCartArray] = useState([])
   const [addresses, setAddresses] = useState([])
   const [showAddress, setShowAddress] = useState(false)
-  const [selectedAddress, setSelectedAddress] = useState(null)
-  
+  const [selectedAddress, setSelectedAddress] = useState(null)  
   const [paymentOption, setPaymentOption] = useState("COD")
 
   const getCart = ()=>{
@@ -31,9 +30,8 @@ const CartPage = () => {
         if(data.success){
             setAddresses(data.addresses)
                 if(data.addresses.length >0){
-                    selectedAddress(data.addresses[0])
-                }
-            
+                    setSelectedAddress(data.addresses[0])
+                }     
         }else{
             toast.error(data.message)
         }
@@ -80,7 +78,7 @@ const CartPage = () => {
     
  useEffect(()=>{
     if(user){
-        getUserAddress
+        getUserAddress()
     }
  },[user])
    
@@ -129,35 +127,35 @@ const CartPage = () => {
 
                 <button onClick={()=>{navigate("/products"); scrollTo(0,0)}} className="group cursor-pointer flex items-center mt-8 gap-2 text-primary font-medium">
                     <img className="group-hover:translate-x-1 transition w-6 h-6" src={assets.rightArrow} alt="right arrow"/>
-                    Continue Shopping
+                    কেনাকাটা চালিয়ে যান
                 </button>
 
             </div>
 
             <div className="max-w-[360px] w-full bg-gray-100/40 p-5 max-md:mt-16 border border-gray-300/70">
-                <h2 className="text-xl md:text-xl font-medium">Order Summary</h2>
+                <h2 className="text-xl md:text-xl font-medium">সংক্ষিপ্ত অর্ডার বিবরণী</h2>
                 <hr className="border-gray-300 my-5" />
 
                 <div className="mb-6">
-                    <p className="text-sm font-medium uppercase">Delivery Address</p>
+                    <p className="text-sm font-medium uppercase">পণ্য ডেলিভারীর ঠিকানা</p>
                     <div className="relative flex justify-between items-start mt-2">
-                        <p className="text-gray-500">{selectedAddress ? `${selectedAddress.street}, ${selectedAddress.city}, ${selectedAddress.state}, ${selectedAddress.country}` :"No address found"}</p>
+                        <p className="text-gray-500">{selectedAddress ? `${selectedAddress.street}, ${selectedAddress.city}, ${selectedAddress.state}, ${selectedAddress.country}` :"ঠিকানা পাওয়া যায়নি"}</p>
                         <button onClick={() => setShowAddress(!showAddress)} className="text-primary hover:underline cursor-pointer">
-                            Change
+                            <span className="text-green-800">ঠিকানা পরিবর্তন করুন</span>
                         </button>
                         {showAddress && (
                             <div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full">
-                                {addresses.map((address, index)=>(<p onClick={() => {setShowAddress(address); setShowAddress(false)}} className="text-gray-500 p-2 hover:bg-gray-100">
+                                {addresses.map((address, index)=>(<p onClick={() => setShowAddress(address)} className="text-gray-500 p-2 hover:bg-gray-100">
                                     {address.street}, {address.city}, {address.state}, {address.country}
                                 </p>))}
                                 <p onClick={() => navigate('/add-address')} className="text-primary text-center cursor-pointer p-2 hover:bg-primary/10">
-                                    Add address
+                                    ঠিকানা যোগ করুন
                                 </p>
                             </div>
                         )}
                     </div>
 
-                    <p className="text-sm font-medium uppercase mt-6">Payment Method</p>
+                    <p className="text-sm font-medium uppercase mt-6">মূল্য পরিশোধ পদ্ধতি</p>
 
                     <select onChange={e=>setPaymentOption(e.target.value)} className="w-full border border-gray-300 bg-white px-3 py-2 mt-2 outline-none">
                         <option value="COD">Cash On Delivery</option>
@@ -169,16 +167,16 @@ const CartPage = () => {
 
                 <div className="text-gray-500 mt-4 space-y-2">
                     <p className="flex justify-between">
-                        <span>Price</span><span>{getCartAmount()}</span>
+                        <span>দাম</span><span>{getCartAmount()}</span>
                     </p>
                     <p className="flex justify-between">
-                        <span>Shipping Fee</span><span className="text-green-600">Free</span>
+                        <span>শিপিং ফি</span><span className="text-green-600">Free</span>
                     </p>
                     <p className="flex justify-between">
-                        <span>Tax (2%)</span><span>{currency}{getCartAmount()* 2/100}</span>
+                        <span>ট্যাক্স (2%)</span><span>{currency}{getCartAmount()* 2/100}</span>
                     </p>
                     <p className="flex justify-between text-lg font-medium mt-3">
-                        <span>Total Amount:</span>
+                        <span>মোট টাকা:</span>
                         <span>
                            {currency}{getCartAmount()}+{getCartAmount()*2/100}
                         </span>

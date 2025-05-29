@@ -12,8 +12,8 @@ const Footer = () => {
                 <div className='max-w-80'>
                 <Link to='/'>
                 <div className='flex flex-row'>
-                        <p>Grocery<span className='text-green-500'>Shop</span></p>
-                    <img className="h-9" src={assets.favicon} alt="dummyLogoColored" />
+                       
+                    <img className="h-9" src={assets.logo} alt="dummyLogoColored" />
                     
                 </div>
             </Link>

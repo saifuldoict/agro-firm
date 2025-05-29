@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { assets } from '../assets/assets'
+import React, { useEffect, useState} from 'react'
 import { useAppContext } from '../context/AppContext'
 import toast from 'react-hot-toast'
 
@@ -8,8 +7,8 @@ const InputField =({type, placeholder, name, handleChange, address})=>(
     <input className='w-full px-2 py-2.5 border border-gray-500/30 rounded outline-none text-gray-500 focus:border-primary transition' 
     type={type}
     placeholder={placeholder}
-    name={name}
     onChange={handleChange}
+    name={name}
     value={address[name]}
     required
     />
@@ -33,12 +32,13 @@ const AddAddress = () => {
             ...prevAddress,
             [name]: value,
         }))
+        
     }
     const onSubmitHandler = async (e)=>{
         e.preventDefault();
         try{
             const {data} = await axios.post('/api/address/add', {address})
-            if(data.useState){
+            if(data.success){
                 toast.success(data.message)
                 navigate('/cart')
             }else{
@@ -81,7 +81,7 @@ const AddAddress = () => {
                  </button>
                 </form>
             </div>
-            <img src={assets} alt='Add Address'/>
+            
         </div>
     </div>
   )
