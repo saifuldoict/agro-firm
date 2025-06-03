@@ -5,6 +5,7 @@
 *{
     font-family: "Outfit", sans-serif;
     
+    
 }
 @theme {
     --color-primary: #167849;
@@ -14,3 +15,6 @@
 .no-scrollbar::-webkit-scrollbar{
     display: none;
 }
+
+
+   

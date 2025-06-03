@@ -10,9 +10,9 @@ const ProductCard = ({product}) => {
   
   return product &&(
     <div onClick={()=>{navigate(`/products/${product.category.toLowerCase()}/${product._id}`); scrollTo(0,0)}} // redirect to product Details page
-    className="  md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full hover:shadow-2xl border-2 border-gray-50/10 transition-all">
-            <div className="group cursor-pointer flex items-center justify-center px-0.5 pt-2 ">
-                <img className="group-hover:scale-105 transition h-48 " src={product.image[0]} alt={product.name} />
+    className=" rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full hover:shadow-2xl transition-all bg-gray-50">
+            <div className="group cursor-pointer flex items-center justify-center px-2">
+                <img className="group-hover:scale-105 transition max-w-26 md:max-w-36" src={product.image[0]} alt={product.name} />
             </div>
             <div className="text-gray-500/60 text-sm">
                 <p>{product.category}</p>
@@ -32,9 +32,9 @@ const ProductCard = ({product}) => {
                     </p>
                     <div onClick={(e)=>{e.stopPropagation();}} className="text-primary">
                         {!cartItems[product._id] ? (
-                            <button className="flex items-center justify-center gap-1 bg-green-900 border-2 border-red-700 w-[150px]  h-[34px] rounded text-white font-medium cursor-pointer  transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-orange-800 ..." onClick={() => addToCart(product._id)} >
-                                <span className=''>অর্ডার করতে চাই</span>
-                                <img className='w-6.5 font-bold' src={assets.rightArrow}/>
+                            <button className="flex items-center justify-center gap-1 bg-indigo-100 border border-indigo-300 md:w-[80px] w-[64px] h-[34px] rounded text-indigo-600 font-medium cursor-pointer" onClick={() => addToCart(product._id)} >
+                                <img className='w-3.5' src={assets.cart}/>
+                                Add.
                             </button>
                         ) : (
                             <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] bg-primary/25 rounded select-none">

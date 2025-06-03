@@ -3,7 +3,7 @@ import { useAppContext } from '../../context/AppContext'
 import toast from 'react-hot-toast';
 import { assets } from '../../assets/assets';
 
-const Order = () => {
+const Orders = () => {
   const {currency,axios}= useAppContext();
   const [orders, setOrders] = useState([]);
 
@@ -66,4 +66,4 @@ const Order = () => {
   )
 }
 
-export default Order
+export default Orders

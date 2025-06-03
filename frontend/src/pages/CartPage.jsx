@@ -6,10 +6,10 @@ import toast from 'react-hot-toast';
 
 
 const CartPage = () => {
-    const {navigate,products,currency, updateCartItem,removeFromCart, cartItems,getCartCount, getCartAmount, axios,user} = useAppContext()
+    const {navigate,products,currency, updateCartItem,removeFromCart, cartItems,getCartCount, getCartAmount, axios,user, setCartItems} = useAppContext()
  
   const [cartArray, setCartArray] = useState([])
-  const [addresses, setAddresses] = useState(dummyAddress)
+  const [addresses, setAddresses] = useState([])
   const [showAddress, setShowAddress] = useState(false)
   const [selectedAddress, setSelectedAddress] = useState(null)  
   const [paymentOption, setPaymentOption] = useState("COD")
@@ -26,7 +26,7 @@ const CartPage = () => {
 
   const getUserAddress = async ()=>{
     try{
-        const {data} =await axios.get('/api/adderss/get');
+        const {data} =await axios.get('/api/address/get');
         if(data.success){
             setAddresses(data.addresses)
                 if(data.addresses.length >0){
@@ -50,7 +50,7 @@ const CartPage = () => {
         if(paymentOption==="COD"){
             const {data}= await axios.post('/api/order/cod',{
                userId: user._id,
-               items: cartArray.map((item=>({product: item._id, quantity: item.quantity}))),
+               items: cartArray.map(item=>({product: item._id, quantity: item.quantity})),
                address: selectedAddress._id
             })
               if(data.success){
@@ -68,7 +68,12 @@ const CartPage = () => {
      
   }
   
-  
+   useEffect(()=>{
+    if(products.length >0 && cartItems){
+        getCart()
+    }
+    
+  },[products, cartItems])
     
  useEffect(()=>{
     if(user){
@@ -113,7 +118,7 @@ const CartPage = () => {
                             </div>
                         </div>
                         <p className="text-center">{currency}{product.offerPrice * product.quantity}</p>
-                        <button onClick={()=>removeFromCart()} className="cursor-pointer mx-auto">
+                        <button onClick={()=>removeFromCart(product._id)} className="cursor-pointer mx-auto">
                             <img src={assets.cross} alt='remove' className='inline-block w-6 h-6'/>
                         </button>
                     </div>)
@@ -162,7 +167,7 @@ const CartPage = () => {
 
                 <div className="text-gray-500 mt-4 space-y-2">
                     <p className="flex justify-between">
-                        <span>দাম</span><span>{getCartAmount()}</span>
+                        <span>দাম</span><span>{currency}{getCartAmount()}</span>
                     </p>
                     <p className="flex justify-between">
                         <span>শিপিং ফি</span><span className="text-green-600">Free</span>

@@ -3,7 +3,7 @@ import { assets, features } from '../assets/assets'
 
 const BottomBanner = () => {
   return (
-    <div className=' mt-24 flex flex-col-2 items-center bg-green-200 border-1 border-gray-100 mb-20 gap-2 h-[380px] '>
+    <div className=' mt-2 flex flex-col-2 items-center bg-green-200 border-1 border-gray-100 mb-20 gap-2 h-[380px] '>
       <div className='w-[50%]'>
           <img src={assets.mixedFruits} alt='banner' className='w-full hidden md:block' />
           <img src={assets.blog_1} alt='banner' className='w-full md:hidden' />

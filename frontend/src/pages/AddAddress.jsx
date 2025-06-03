@@ -32,7 +32,7 @@ const AddAddress = () => {
             ...prevAddress,
             [name]: value,
         }))
-        
+        console.log(address)
     }
     const onSubmitHandler = async (e)=>{
         e.preventDefault();

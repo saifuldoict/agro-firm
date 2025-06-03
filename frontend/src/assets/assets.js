@@ -91,6 +91,7 @@ import malta_1 from './malta_1.jpg'
 import malta_2 from './malta_2.jpg'
 import cow_1 from './cow_1.jpg'
 import cow_2 from './cow_2.jpg'
+import chairman_image from './chairman_image.png'
 
 
 
@@ -187,7 +188,8 @@ export const assets ={
     malta_1,
     malta_2,
     cow_1,
-    cow_2
+    cow_2,
+    chairman_image
     
 
 
@@ -234,6 +236,22 @@ export const categories = [
     
 ]
 
+export const speech=[
+    {
+        post: "Chairman",
+        text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+        image: chairman_image,
+        name: "রাসেল",
+        bgColor: "#F0F5DE"
+    },
+    {
+        post: "Managing Director",
+        text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+        image: chairman_image,
+        name: "রাসেল আহমেদ",
+        bgColor: "#E0F6FF"
+    },
+]
 
 export const footerLinks =[
     {
