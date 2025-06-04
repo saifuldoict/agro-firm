@@ -23,6 +23,7 @@ import AddProduct from './pages/seller/AddProduct'
 import ProdcutList from './pages/seller/ProdcutList'
 import Order from './pages/seller/Order'
 import Loading from './components/Loading'
+import Message from './pages/seller/Message'
 
 function App() {
   const {showUserLogin, isSeller} = useAppContext()
@@ -54,6 +55,7 @@ const isSellerPath = useLocation().pathname.includes("seller")
                 <Route index element={isSeller ? <AddProduct/> : null}/>
                 <Route path='product-list' element={<ProdcutList/>}/>
                 <Route path='orders' element={<Order/>}/>
+                <Route path='message' element={<Message/>}/>
           </Route>
         </Routes>
         </div>

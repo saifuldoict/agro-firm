@@ -1,10 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { speech } from '../assets/assets.js'
 import {useNavigate} from 'react-router-dom'
+import { useAppContext } from '../context/AppContext.jsx'
+import toast from 'react-hot-toast'
 
 
 const Speech = () => {
-    const navigate = useNavigate()
+    const {navigate, axios} = useAppContext()
+    const [post, setPost]= useState('');
+    const [name, setName]= useState('')
+    const [description, setDeacription]= useState('')
+    const [files, setFiles]= useState('')
+
+
+  const onSubmitHandler = async(e)=>{
+    try{
+      e.preventDefault()
+      const speachData ={
+        post,
+        name,
+        description: description.split('\n')
+      }
+
+      const formData = new FormData()
+       formData.append('speachData', JSON.stringify(speachData))
+       for(let i=0; i<files.length; i++){
+                formData.append('images', files[i])
+            }
+            const {data}= await axios.post ('/api/posts/create', formData)
+            if(data.success){
+              toast.success(data.message)
+              setPost(""),
+              setName(" "),
+              setDeacription(""),
+              setFiles([])
+            }else{
+                toast.error(data.message)
+            }
+
+    }catch(error){
+      toast.error(error.message)
+    }
+    
+  }
+
+
   return (
     <div className='mt-20 w-58'>
         
